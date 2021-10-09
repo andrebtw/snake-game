@@ -13,9 +13,22 @@ class ApplesSpawn:
 
 def game():
     game_end = False
+    x = 32
+    y = 32
+
+    apple = "▅"
+    snake_head = "#"
+
+    border = "@"
+    space = " "
+
+    border_done = (y+2)*border
 
     while game_end == False:
-        pass
+        for i in range (y):
+            print(border_done)
+        quit()
+            
 
 
 def intro():
