@@ -1,8 +1,11 @@
 import pygame
 from pygame.locals import *
 
+# Colors
 green_1 = (6, 150, 43)
 green_2 = (25, 90, 44)
+black = (0, 0, 0)
+white = (255, 255, 255)
 
 # INITIALISATION
 pygame.init()  # Initialise Pygame lib
@@ -19,11 +22,23 @@ def update():
 
 
 class Snake:
-    pass
+    def __init__(self, speed, color):
+        self.speed = speed
+        self.color = color
+
+    def start(self):
+        pass
+
+    def die(self):
+        pass
+
+    def eat(self):
+        pass
 
 
 class AppleSpawn:
     pass
+
 
 # Function to draw green squares all over the background
 def background_green(pos, y):
@@ -65,7 +80,16 @@ def background():
         background_green(i, i)
 
 
+def enter_text():
+    font = pygame.font.Font("cartoonist_kooky.ttf", 35)
+    img = font.render('PRESS ANY KEY TO START THE GAME', True, white)
+    screen.blit(img, (300 - img.get_width() // 2, 285))  # Center the text
+
+
 def game():
+    background()
+    update()
+
     running = True
 
     while running:
@@ -73,12 +97,25 @@ def game():
             if event.type == pygame.QUIT:
                 running = False
 
+
+def game_intro():
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYUP:
+                running = False
+                game()
+
         background()
+        enter_text()
         update()
 
 
 def main():
-    game()
+    game_intro()
 
 
 if __name__ == "__main__":
