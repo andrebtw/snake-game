@@ -1,14 +1,12 @@
 import random
 
+
 class Snake:
     pass
 
+
 class ApplesSpawn:
     pass
-
-
-
-
 
 
 def game():
@@ -22,13 +20,12 @@ def game():
     border = "@"
     space = " "
 
-    border_done = (y+2)*border
+    border_done = (y + 2) * border
 
     while game_end == False:
-        for i in range (y):
+        for i in range(y):
             print(border_done)
         quit()
-            
 
 
 def intro():
