@@ -6,6 +6,7 @@ green_1 = (6, 150, 43)
 green_2 = (25, 90, 44)
 black = (0, 0, 0)
 white = (255, 255, 255)
+blue_1 = (10, 20, 180)
 
 # INITIALISATION
 pygame.init()  # Initialise Pygame lib
@@ -13,6 +14,8 @@ fps = 60  # Frames per second in Pygame
 
 width = 600  # Width of the window
 height = 600  # Height of the window
+
+square = 30  # Size of each squares in pixels
 
 screen = pygame.display.set_mode((width, height), )
 
@@ -22,12 +25,18 @@ def update():
 
 
 class Snake:
-    def __init__(self, speed, color):
-        self.speed = speed
-        self.color = color
+    def __init__(self):
+        self.speed = -1
+        self.color = blue_1
 
     def start(self):
-        pass
+        x = 300
+        y = 300
+
+        dy = self.speed - 1
+
+        dx = 0
+        pygame.draw.rect(screen, self.color, (x, dy, square, square))
 
     def die(self):
         pass
@@ -37,7 +46,8 @@ class Snake:
 
 
 class AppleSpawn:
-    pass
+    def __init__(self):
+        pass
 
 
 # Function to draw green squares all over the background
@@ -45,32 +55,32 @@ def background_green(pos, y):
     for i in range(1, 20, 1):
         if pos == 0:
             if i == 1:
-                pygame.draw.rect(screen, green_2, (0, y * 30, 30, 30))
-                pygame.draw.rect(screen, green_1, (0 + 30, y * 30, 30, 30))
+                pygame.draw.rect(screen, green_2, (0, y * square, square, square))
+                pygame.draw.rect(screen, green_1, (0 + square, y * square, square, square))
             elif i % 2 == 0:
                 x = i * 30
-                pygame.draw.rect(screen, green_2, (x, y * 30, 30, 30))
-                pygame.draw.rect(screen, green_1, (x + 30, y * 30, 30, 30))
+                pygame.draw.rect(screen, green_2, (x, y * square, square, square))
+                pygame.draw.rect(screen, green_1, (x + square, y * square, square, square))
             else:
                 pass
         elif pos % 2:
             if i == 1:
-                pygame.draw.rect(screen, green_1, (0, y * 30, 30, 30))
-                pygame.draw.rect(screen, green_2, (0 + 30, y * 30, 30, 30))
+                pygame.draw.rect(screen, green_1, (0, y * square, square, square))
+                pygame.draw.rect(screen, green_2, (0 + square, y * square, square, square))
             elif i % 2 == 0:
                 x = i * 30
-                pygame.draw.rect(screen, green_1, (x, y * 30, 30, 30))
-                pygame.draw.rect(screen, green_2, (x + 30, y * 30, 30, 30))
+                pygame.draw.rect(screen, green_1, (x, y * square, square, square))
+                pygame.draw.rect(screen, green_2, (x + square, y * square, square, square))
             else:
                 pass
         else:
             if i == 1:
-                pygame.draw.rect(screen, green_2, (0, y * 30, 30, 30))
-                pygame.draw.rect(screen, green_1, (0 + 30, y * 30, 30, 30))
+                pygame.draw.rect(screen, green_2, (0, y * square, square, square))
+                pygame.draw.rect(screen, green_1, (0 + square, y * square, square, square))
             elif i % 2 == 0:
                 x = i * 30
-                pygame.draw.rect(screen, green_2, (x, y * 30, 30, 30))
-                pygame.draw.rect(screen, green_1, (x + 30, y * 30, 30, 30))
+                pygame.draw.rect(screen, green_2, (x, y * square, square, square))
+                pygame.draw.rect(screen, green_1, (x + square, y * square, square, square))
             else:
                 pass
 
@@ -90,12 +100,19 @@ def game():
     background()
     update()
 
+    snake = Snake()
+
     running = True
 
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+        background()
+        snake.start()
+        update()
+        pygame.time.Clock().tick(fps)
 
 
 def game_intro():
