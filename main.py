@@ -36,7 +36,7 @@ class Snake:
         dy = self.speed - 1
 
         dx = 0
-        pygame.draw.rect(screen, self.color, (x, dy, square, square))
+        pygame.draw.rect(screen, self.color, (x, dy, square, square)) #draw snake
 
     def die(self):
         pass
