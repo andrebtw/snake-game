@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from pygame.locals import *
 
@@ -26,25 +28,21 @@ def update():
 
 class Snake:
     def __init__(self):
-        self.speed = -1
         self.color = blue_1
         self.dy = 300
         self.dx = 300
-
-    def start(self):
-        x = 300
-        y = 300
-
-        self.dy = self.dy + self.speed
-
-        dx = 0
-        pygame.draw.rect(screen, self.color, (x, self.dy, square, square))  # draw snake
 
     def die(self):
         pass
 
     def eat(self):
         pass
+
+    def move(self, direction):
+        if direction == "top":
+            self.dy = self.dy + -30
+            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+            time.sleep(0.4)
 
 
 class AppleSpawn:
@@ -112,7 +110,7 @@ def game():
                 running = False
 
         background()
-        snake.start()
+        snake.move("top")
         update()
         pygame.time.Clock().tick(fps)
 
