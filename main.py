@@ -39,10 +39,18 @@ class Snake:
         pass
 
     def move(self, direction):
-        if direction == "top":
-            self.dy = self.dy + -30
+        if direction == "up":
+            self.dy = self.dy + -2
             pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
-            time.sleep(0.4)
+        elif direction == "down":
+            self.dy = self.dy + 2
+            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+        elif direction == "left":
+            self.dx = self.dx + -2
+            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+        elif direction == "right":
+            self.dx = self.dx + 2
+            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
 
 
 class AppleSpawn:
@@ -96,6 +104,8 @@ def enter_text():
     screen.blit(img, (300 - img.get_width() // 2, 285))  # Center the text
 
 
+
+
 def game():
     background()
     update()
@@ -104,13 +114,29 @@ def game():
 
     running = True
 
+    direction = None
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    direction = "down"
+                    print("down")
+                if event.key == pygame.K_UP:
+                    direction = "up"
+                    print("up")
+                if event.key == pygame.K_LEFT:
+                    direction = "left"
+                    print("left")
+                if event.key == pygame.K_RIGHT:
+                    direction = "right"
+                    print("right")
 
         background()
-        snake.move("top")
+        snake.move(direction)
+
         update()
         pygame.time.Clock().tick(fps)
 
