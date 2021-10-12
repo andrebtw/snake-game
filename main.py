@@ -28,15 +28,17 @@ class Snake:
     def __init__(self):
         self.speed = -1
         self.color = blue_1
+        self.dy = 300
+        self.dx = 300
 
     def start(self):
         x = 300
         y = 300
 
-        dy = self.speed - 1
+        self.dy = self.dy + self.speed
 
         dx = 0
-        pygame.draw.rect(screen, self.color, (x, dy, square, square)) #draw snake
+        pygame.draw.rect(screen, self.color, (x, self.dy, square, square))  # draw snake
 
     def die(self):
         pass
