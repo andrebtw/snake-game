@@ -178,13 +178,13 @@ def game():
         if x < 0:
             running = False
             lose()
-        if x > 600:
+        if x > 570:
             running = False
             lose()
         if y < 0:
             running = False
             lose()
-        if y > 600:
+        if y > 570:
             running = False
             lose()
 
