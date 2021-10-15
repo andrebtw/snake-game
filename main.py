@@ -1,4 +1,5 @@
 import time
+import random
 
 import pygame
 from pygame.locals import *
@@ -9,6 +10,7 @@ green_2 = (25, 90, 44)
 black = (0, 0, 0)
 white = (255, 255, 255)
 blue_1 = (10, 20, 180)
+red = (255, 0, 0)
 
 # INITIALISATION
 pygame.init()  # Initialise Pygame lib
@@ -61,11 +63,17 @@ class Snake:
         return x, y
 
 
-
-
-class AppleSpawn:
+class Apple:
     def __init__(self):
-        pass
+        all_squares = []
+        for i in range(0, 600, 30):
+            all_squares.append(i)
+        self.color = red
+        self.x = random.choice(all_squares)
+        self.y = random.choice(all_squares)
+
+    def display(self):
+        pygame.draw.rect(screen, self.color, (self.x, self.y, square, square))
 
 
 def lose_text():
@@ -129,7 +137,8 @@ def background_green(pos, y):
             else:
                 pass
 
-#bg
+
+# bg
 def background():
     for i in range(20):
         background_green(i, i)
@@ -151,6 +160,8 @@ def game():
 
     direction = None
 
+    apple = Apple()
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -171,9 +182,11 @@ def game():
 
         background()
 
+        apple.display()
+
         x, y = snake.coordinates()
 
-        #score = snake.score()
+        # score = snake.score()
 
         if x < 0:
             running = False
