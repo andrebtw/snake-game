@@ -66,8 +66,10 @@ class Snake:
 class Apple:
     def __init__(self):
         all_squares = []
+
         for i in range(0, 600, 30):
             all_squares.append(i)
+
         self.color = red
         self.x = random.choice(all_squares)
         self.y = random.choice(all_squares)
@@ -114,8 +116,6 @@ def background_green(pos, y):
                 x = i * 30
                 pygame.draw.rect(screen, green_2, (x, y * square, square, square))
                 pygame.draw.rect(screen, green_1, (x + square, y * square, square, square))
-            else:
-                pass
         elif pos % 2:
             if i == 1:
                 pygame.draw.rect(screen, green_1, (0, y * square, square, square))
@@ -124,8 +124,6 @@ def background_green(pos, y):
                 x = i * 30
                 pygame.draw.rect(screen, green_1, (x, y * square, square, square))
                 pygame.draw.rect(screen, green_2, (x + square, y * square, square, square))
-            else:
-                pass
         else:
             if i == 1:
                 pygame.draw.rect(screen, green_2, (0, y * square, square, square))
@@ -134,11 +132,8 @@ def background_green(pos, y):
                 x = i * 30
                 pygame.draw.rect(screen, green_2, (x, y * square, square, square))
                 pygame.draw.rect(screen, green_1, (x + square, y * square, square, square))
-            else:
-                pass
 
 
-# bg
 def background():
     for i in range(20):
         background_green(i, i)
