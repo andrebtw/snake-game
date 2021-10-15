@@ -31,7 +31,7 @@ class Snake:
         self.color = blue_1
         self.dy = 300
         self.dx = 300
-        self.speed = 3
+        self.speed = 4
         self.score = 0
 
     def eat(self):
@@ -129,7 +129,7 @@ def background_green(pos, y):
             else:
                 pass
 
-
+#bg
 def background():
     for i in range(20):
         background_green(i, i)
