@@ -35,6 +35,7 @@ class Snake:
         self.dx = 300
         self.speed = 4
         self.score = 0
+        self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))
 
     def eat(self):
         pass
@@ -46,21 +47,22 @@ class Snake:
 
         if direction == "up":
             self.dy = self.dy + - self.speed
-            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+            self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
         elif direction == "down":
             self.dy = self.dy + self.speed
-            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+            self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
         elif direction == "left":
             self.dx = self.dx + -self.speed
-            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+            self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
         elif direction == "right":
             self.dx = self.dx + self.speed
-            pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
+            self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
 
     def coordinates(self):
         x = self.dx
         y = self.dy
-        return x, y
+        rect = self.snake_rect
+        return x, y, rect
 
 
 class Apple:
@@ -73,9 +75,16 @@ class Apple:
         self.color = red
         self.x = random.choice(all_squares)
         self.y = random.choice(all_squares)
+        self.apple_rect = pygame.draw.rect(screen, self.color, (self.x, self.y, square, square))
 
     def display(self):
-        pygame.draw.rect(screen, self.color, (self.x, self.y, square, square))
+        self.apple_rect = pygame.draw.rect(screen, self.color, (self.x, self.y, square, square))
+
+    def coordinates(self):
+        x = self.x
+        y = self.y
+        rect = self.apple_rect
+        return x, y, rect
 
 
 def lose_text():
@@ -179,22 +188,27 @@ def game():
 
         apple.display()
 
-        x, y = snake.coordinates()
+        snake_x, snake_y, snake_rect = snake.coordinates()
+
+        apple_x, apple_y, apple_rect = apple.coordinates()
 
         # score = snake.score()
 
-        if x < 0:
+        if snake_x < 0:
             running = False
             lose()
-        if x > 570:
+        if snake_x > 570:
             running = False
             lose()
-        if y < 0:
+        if snake_y < 0:
             running = False
             lose()
-        if y > 570:
+        if snake_y > 570:
             running = False
             lose()
+
+        if snake_rect.colliderect(apple_rect):
+            apple = Apple()
 
         snake.move(direction)
 
