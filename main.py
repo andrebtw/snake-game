@@ -38,7 +38,7 @@ class Snake:
         self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))
 
     def eat(self):
-        pass
+        self.score = self.score + 1
 
     def move(self, direction):
         all_squares = []
@@ -209,6 +209,7 @@ def game():
 
         if snake_rect.colliderect(apple_rect):
             apple = Apple()
+            snake.eat()
 
         snake.move(direction)
 
