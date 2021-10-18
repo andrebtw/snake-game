@@ -36,6 +36,7 @@ class Snake:
         self.speed = 4
         self.score = 0
         self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))
+        self.snake_direction = "None"
 
     def eat(self):
         self.score = self.score + 1
@@ -46,15 +47,19 @@ class Snake:
             all_squares.append(i)
 
         if direction == "up":
+            self.direction = "up"
             self.dy = self.dy + - self.speed
             self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
         elif direction == "down":
+            self.direction = "down"
             self.dy = self.dy + self.speed
             self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
         elif direction == "left":
+            self.direction = "left"
             self.dx = self.dx + -self.speed
             self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
         elif direction == "right":
+            self.direction = "right"
             self.dx = self.dx + self.speed
             self.snake_rect = pygame.draw.rect(screen, self.color, (self.dx, self.dy, square, square))  # draw snake
 
@@ -63,6 +68,9 @@ class Snake:
         y = self.dy
         rect = self.snake_rect
         return x, y, rect
+
+    def snake_direction(self):
+        return 5
 
 
 class Apple:
@@ -166,23 +174,29 @@ def game():
 
     apple = Apple()
 
+    #snake_direction = str(snake.snake_direction())
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    direction = "down"
-                    print("down")
+                    #if "up" not in direction:
+                        direction = "down"
+                        print("down")
                 if event.key == pygame.K_UP:
-                    direction = "up"
-                    print("up")
+                    #if "down" not in direction:
+                        direction = "up"
+                        print("up")
                 if event.key == pygame.K_LEFT:
-                    direction = "left"
-                    print("left")
+                    #if "right" not in direction:
+                        direction = "left"
+                        print("left")
                 if event.key == pygame.K_RIGHT:
-                    direction = "right"
-                    print("right")
+                    #if "left" not in direction:
+                        direction = "right"
+                        print("right")
 
         background()
 
